@@ -5,23 +5,35 @@ import Char from './Char/Char';
 
 class App extends Component {
 
+  //state as a class property
   state = {
     userInput: ''
   }
 
+  //this event handler function(arrow function), passes the event object as a parameter
   inputChangedHandler = (event) => {
+    //this.setState allows to update the value of the first state of the userInput
+    //with event.target.value, wich retrieves the value of the input that was called
     this.setState({userInput: event.target.value});
   }
 
 
+  //event handler for deleting characters
   deleteCharHandler = (index) => {
+    //declaration of variable 'text' that should be the user input splited
     const text = this.state.userInput.split('');
+    //splice will delete 1 character at the index
     text.splice(index, 1);
+    //declaration of variable updatedText should be the spliced text unified (no separator)
     const updatedText = text.join('');
+    //userinput should be updated to the updatedText
     this.setState({userInput: updatedText});
   }
 
   render() {
+    //variable charList splits the String in characters becausE of split() String method
+    //as the separator is '', the String is separated char by char. By example, if the separator was '.'
+    //then the String will only separate when it finds a '.' (example.test ==> example test)
     const charList = this.state.userInput.split('').map((ch, index) => {
       return <Char 
       character = {ch} 
